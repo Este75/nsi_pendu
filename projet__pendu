@@ -1,0 +1,54 @@
+import random
+liste = ["fraise", "football", "hyperbole", "television", "ordinateur", "banane", "cinema", "piscine", "rouge", "espace", "metaphore", "mathematique", "ventilateur", "carotte", "ecologie", "allemagne", "equateur", "australie", "universelle", "disney", "voiture"]
+mot_choisi = random.choice(liste)
+
+# Variables clés
+lettres_utilises = []
+trouve = False
+compteur_faux = 0
+corps_plein = ["O", "-", "|", "-", "|", "|"]
+corps = ["", "", "", "", "", ""]
+
+while not trouve:
+    
+    trouve = True
+    print("+----+")
+    print("|    |")
+    print("|    {}".format(corps[0]))
+    print("|   {}{}{}".format(corps[1], corps[2], corps[3]))
+    print("|   {} {}".format(corps[4], corps[5]))
+    print("|")
+    print("==========")
+    
+    #Instructions si l'utilisateur a faux
+    for l in mot_choisi:
+        if l in lettres_utilises:
+            print(l, end=" ")
+        else:
+            trouve = False
+            print("_", end=" ")
+    print()
+
+    #Boucle pour afficher les lettres utilisés
+    print("Lettres utilisés : ", end="")
+    for l in lettres_utilises:
+        print(l, end=" / ")
+        
+    print()
+    #Nbre de fautes par l'utilisateur jusqu'a 6
+    if compteur_faux > 5:
+        print("Perdu ! Vous avez depasse le nbre de tentatives !")
+        
+    
+    if trouve:
+        print("Vous avez gagner !")
+        
+    
+    lettre = input("Entrez une lettre: ")
+    lettres_utilises.append(lettre)
+    
+    #Permet d'afficher les membres à chaque mauvaises réponses
+    if lettre not in mot_choisi:
+        corps[compteur_faux] = corps_plein[compteur_faux]
+        compteur_faux += 1
+        
